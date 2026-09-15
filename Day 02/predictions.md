@@ -1,0 +1,15 @@
+1. "53"
+2. 2
+3. 6
+4. false
+5. true
+6. "object"
+7. "object"
+8. "default"
+9. 0
+10. false
+11. true
+12. true
+13. 1
+14. 1
+15. NaN
