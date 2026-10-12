@@ -4,7 +4,7 @@
 - Learned to read TypeScript errors and identify type mismatches and undefined values.
 
 ### 2. Types & Variables
-- `const` often infers literal types, while `let` infers broader types.
+- `const`  often infers literal types, while `let` infers broader types.
 - Explored primitives, strict mode, arrays, tuples, and objects.
 - `any` bypasses checks, `unknown` requires validation, and `as` asserts a type.
 
