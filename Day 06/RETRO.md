@@ -6,7 +6,7 @@
 3. **TypeScript:** Catching errors at compile time before running code.
 
 ### Biggest Challenge & Breakthrough
-- **Challenge:** Managing asynchronous operations and API failures.
+- **Challenge:**  Managing asynchronous operations and API failures.
 - **Breakthrough:** Modular code and structured error handling make debugging easier and more predictable.
 
 ### Future Goals
