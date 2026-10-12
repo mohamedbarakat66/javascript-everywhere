@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typed DOM Grade Report</title>
+</head>
+<body>
+    <h1>Typed DOM Grade Report</h1>
+    
+    <div id="app-state">
+        <button id="load-btn">Load Students</button>
+        <span id="status-msg"></span>
+    </div>
+
+    <form id="add-form">
+        <input type="text" id="name-input" placeholder="Student Name" required />
+        <input type="number" id="score-input" placeholder="Score" required />
+        <button type="submit" id="submit-btn">Add Student</button>
+    </form>
+
+    <div id="summary-section"></div>
+    <ul id="students-list"></ul>
+
+    <script type="module" src="./dist/main.js"></script>
+</body>
+</html>

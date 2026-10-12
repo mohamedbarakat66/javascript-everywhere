@@ -1,0 +1,30 @@
+# TypeScript Snippets — Predictions
+
+- **p01:** TypeScript error because `score` is a number, not a string.
+- **p02:** `g1` works, but `g2` gives a type error because `other` is a string.
+- **p03:** Prints `"23"` because `2 + "3"` joins them as a string. `any` disables type checking.
+- **p04:** Runtime error because `scores[5]` is `undefined`.
+- **p05:** Runtime error because `find()` returns `undefined` when no item matches.
+- **p06:** Runtime error if `name` is not provided.
+- **p07:** TypeScript error because the tuple has three values instead of two.
+- **p08:** TypeScript error because `age` is not defined in the `Student` interface.
+- **p09:** May work because the object is assigned through another variable.
+- **p10:** `readonly` prevents changing `id`, but `tags.push()` can still modify the array.
+- **p11:** TypeScript error because `unknown` needs checking before accessing properties.
+- **p12:** May compile, but causes a runtime error because `nmae` is incorrect.
+- **p13:** Works because the type guard checks whether the value is a string or number.
+- **p14:** TypeScript error because the generic result may be a string or number.
+- **p15:** TypeScript error because numbers do not have a `length` property.
+- **p16:** Prints a Promise instead of the final result because there is no `await`.
+- **p17:** Prints `92.0` because `await` waits for the result.
+- **p18:** TypeScript error because `err` must be checked before accessing `message`.
+- **p19:** May compile, but `t.score` is `undefined` at runtime.
+- **p20:** Prints `0` because enum values start at zero by default.
+- **p21:** `Partial` makes properties optional, while `Required` makes them required.
+- **p22:** `"M"` is valid, but `"L"` causes a type error if it is not in `sizes`.
+- **p23:** Prints `object`, `object`, `number`, and `bigint`.
+- **p24:** The array can contain strings and numbers, depending on TypeScript's inference.
+- **p25:** TypeScript error because `bigint` cannot be added to a regular number.
+- **p26:** `push()` can add another value at runtime, making the tuple length `3`.
+- **p27:** TypeScript error because `as const` makes properties readonly.
+- **p28:** `Number("12px")` returns `NaN`, and `Number.isNaN()` returns `true`.

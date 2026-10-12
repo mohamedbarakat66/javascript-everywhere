@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Layout lab page demonstrating semantic HTML and accessible CSS grid layouts.">
+    <title>Layout Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Layout Lab</h1>
+        <nav aria-label="Main Navigation">
+            <a href="index.html">Home</a>
+            <a href="layout-lab.html">Layout Lab</a>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h2>Contact Us</h2>
+            <form action="#" method="POST">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="topic">Topic:</label>
+                    <select id="topic" name="topic">
+                        <option value="general">General</option>
+                        <option value="support">Support</option>
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </article>
+
+        <section aria-labelledby="cards-heading">
+            <h2 id="cards-heading">Cards Grid</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+                <div>Card 1</div>
+                <div>Card 2</div>
+                <div>Card 3</div>
+                <div>Card 4</div>
+                <div>Card 5</div>
+                <div>Card 6</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Back to Home</a></p>
+    </footer>
+
+</body>
+</html>

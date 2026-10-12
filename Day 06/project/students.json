@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Ahmed Ali",
+    "score": 92
+  },
+  {
+    "id": 2,
+    "name": "Fatma Omar",
+    "score": 78
+  },
+  {
+    "id": 3,
+    "name": "Mahmoud Hassan",
+    "score": 85
+  },
+  {
+    "id": 4,
+    "name": "Sara Khaled",
+    "score": 58
+  },
+  {
+    "id": 5,
+    "name": "Youssef Ibrahim",
+    "score": 95
+  }
+]

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Task Manager</h1>
+  </header>
+
+  <main>
+    <section aria-labelledby="add-task-heading">
+      <h2 id="add-task-heading">Add New Task</h2>
+      <form id="task-form">
+        <div>
+          <label for="task-title">Task Title</label>
+          <input type="text" id="task-title" name="title" required>
+        </div>
+        <button type="submit">Add Task</button>
+      </form>
+      <div id="form-error" role="alert"></div>
+    </section>
+
+    <section aria-labelledby="tasks-list-heading">
+      <h2 id="tasks-list-heading">Your Tasks</h2>
+      <!-- Status Line -->
+      <p id="status-message" role="status">Loading tasks...</p>
+      <ul id="task-list"></ul>
+    </section>
+  </main>
+
+  
+  <footer>
+    <p>&copy; 2026 Task Manager App. <a href="layout-lab.html">View Layout Lab</a></p>
+  </footer>
+</footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "typed-grade-report",
+  "version": "1.0.0",
+  "type": "module",
+ "scripts": {
+  "report": "npx tsx src/report.ts",
+  "check": "tsc --noEmit",
+  "build": "tsc",
+  "start": "node dist/report.js"
+},
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.0.0"
+  }
+}
