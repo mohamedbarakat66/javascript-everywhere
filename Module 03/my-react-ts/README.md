@@ -1,0 +1,24 @@
+### Assignment 1.1 – Task Status
+
+I will create a typed function to move tasks between statuses.
+It will return the next status in the cycle.
+I will use `map` and object spread to update tasks without mutation.
+
+### Assignment 2.1 – Task Progress
+
+I will use `filter` to count completed tasks.
+I will calculate the completion percentage based on the total tasks.
+The values will be calculated from the tasks array, not stored in state.
+
+### Assignment 3.1 – Undo Delete
+
+I will add a state to store the last deleted task.
+When a task is deleted, I will save it before removing it.
+The Undo button will restore the deleted task with the same ID.
+
+
+### Assignment 4.1 – Task Sorting
+
+I will add a state to track the current sort mode.
+I will sort a copy of the tasks array by title when needed.
+The original tasks array will remain unchanged.
