@@ -3,7 +3,9 @@ import TaskCard from "./TaskCard";
 import { nextStatus } from "./nextStatus";
 import type { Task } from "./types";
 import "./App.css";
+
 type SortMode = "default" | "title";
+
 function App() {
   const [tasks, setTasks] = useState<Task[]>([
     { id: 1, title: "Learn React", status: "To Do" },
@@ -13,6 +15,7 @@ function App() {
 
   const [lastDeletedTask, setLastDeletedTask] = useState<Task | null>(null);
   const [sortMode, setSortMode] = useState<SortMode>("default");
+  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
 
   const doneCount = tasks.filter(
     (task) => task.status === "Done"
@@ -23,10 +26,10 @@ function App() {
       ? 0
       : Math.round((doneCount / tasks.length) * 100);
 
-      const sortedTasks =
-  sortMode === "title"
-    ? [...tasks].sort((a, b) => a.title.localeCompare(b.title))
-    : tasks;
+  const sortedTasks =
+    sortMode === "title"
+      ? [...tasks].sort((a, b) => a.title.localeCompare(b.title))
+      : tasks;
 
   function handleNextStatus(id: number) {
     setTasks((prevTasks) =>
@@ -48,6 +51,10 @@ function App() {
     setTasks((prevTasks) =>
       prevTasks.filter((task) => task.id !== id)
     );
+
+    if (selectedTaskId === id) {
+      setSelectedTaskId(null);
+    }
   }
 
   function handleUndo() {
@@ -59,6 +66,18 @@ function App() {
     ]);
 
     setLastDeletedTask(null);
+  }
+
+  function handleSelectNext() {
+    if (sortedTasks.length === 0) return;
+
+    const currentIndex = sortedTasks.findIndex(
+      (task) => task.id === selectedTaskId
+    );
+
+    const nextIndex = (currentIndex + 1) % sortedTasks.length;
+
+    setSelectedTaskId(sortedTasks[nextIndex].id);
   }
 
   return (
@@ -74,23 +93,40 @@ function App() {
           Undo Delete
         </button>
       )}
-{sortedTasks.map((task) => (
-        <TaskCard
-          key={task.id}
-          task={task}
-          onNextStatus={() => handleNextStatus(task.id)}
-          onDelete={() => handleDelete(task.id)}
-        />
-      ))}
+
+      <button onClick={handleSelectNext}>
+        Select next
+      </button>
+
       <button
-  onClick={() =>
-    setSortMode((prev) =>
-      prev === "default" ? "title" : "default"
-    )
-  }
->
-  Sort: {sortMode}
-</button>
+        onClick={() =>
+          setSortMode((prev) =>
+            prev === "default" ? "title" : "default"
+          )
+        }
+      >
+        Sort: {sortMode}
+      </button>
+
+      {sortedTasks.map((task) => (
+        <div
+          key={task.id}
+          style={{
+            border: selectedTaskId === task.id
+              ? "2px solid blue"
+              : "2px solid transparent",
+            padding: "10px",
+            margin: "10px",
+            borderRadius: "8px",
+          }}
+        >
+          <TaskCard
+            task={task}
+            onNextStatus={() => handleNextStatus(task.id)}
+            onDelete={() => handleDelete(task.id)}
+          />
+        </div>
+      ))}
     </div>
   );
 }

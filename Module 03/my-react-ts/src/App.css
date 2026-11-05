@@ -29,8 +29,10 @@ h1 {
 }
 
 .app > p {
-  color: #94a3b8;
-  margin-bottom: 35px;
+  color: #60a5fa;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 12px 0 30px;
 }
 
 .task-card {
@@ -64,7 +66,7 @@ button {
   border: none;
   padding: 11px 20px;
   border-radius: 8px;
-  margin-top: 18px;
+  margin: 10px 10px 10px 0;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -79,15 +81,8 @@ button:active {
   transform: scale(0.97);
 }
 
-.app > p {
-  color: #60a5fa;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 12px 0 30px;
-}
 .task-card button:last-child {
   background: #dc2626;
-  margin-left: 10px;
 }
 
 .task-card button:last-child:hover {
