@@ -11,14 +11,16 @@ function App() {
     { id: 3, title: "Build Project", status: "Done" },
   ]);
 
-  const doneCount = tasks.filter(
-  (task) => task.status === "Done"
-).length;
+  const [lastDeletedTask, setLastDeletedTask] = useState<Task | null>(null);
 
-const percentage =
-  tasks.length === 0
-    ? 0
-    : Math.round((doneCount / tasks.length) * 100);
+  const doneCount = tasks.filter(
+    (task) => task.status === "Done"
+  ).length;
+
+  const percentage =
+    tasks.length === 0
+      ? 0
+      : Math.round((doneCount / tasks.length) * 100);
 
   function handleNextStatus(id: number) {
     setTasks((prevTasks) =>
@@ -30,23 +32,53 @@ const percentage =
     );
   }
 
-return (
-  <div className="app">
-    <h1>My Tasks</h1>
+  function handleDelete(id: number) {
+    const deletedTask = tasks.find((task) => task.id === id);
 
-    <p>
-      {doneCount} of {tasks.length} done ({percentage}%)
-    </p>
+    if (!deletedTask) return;
 
-    {tasks.map((task) => (
-      <TaskCard
-        key={task.id}
-        task={task}
-        onNextStatus={() => handleNextStatus(task.id)}
-      />
-    ))}
-  </div>
-);
+    setLastDeletedTask(deletedTask);
+
+    setTasks((prevTasks) =>
+      prevTasks.filter((task) => task.id !== id)
+    );
+  }
+
+  function handleUndo() {
+    if (!lastDeletedTask) return;
+
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      lastDeletedTask,
+    ]);
+
+    setLastDeletedTask(null);
+  }
+
+  return (
+    <div className="app">
+      <h1>My Tasks</h1>
+
+      <p>
+        {doneCount} of {tasks.length} done ({percentage}%)
+      </p>
+
+      {lastDeletedTask && (
+        <button onClick={handleUndo}>
+          Undo Delete
+        </button>
+      )}
+
+      {tasks.map((task) => (
+        <TaskCard
+          key={task.id}
+          task={task}
+          onNextStatus={() => handleNextStatus(task.id)}
+          onDelete={() => handleDelete(task.id)}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default App;

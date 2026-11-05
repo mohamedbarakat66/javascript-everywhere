@@ -85,3 +85,11 @@ button:active {
   font-weight: 600;
   margin: 12px 0 30px;
 }
+.task-card button:last-child {
+  background: #dc2626;
+  margin-left: 10px;
+}
+
+.task-card button:last-child:hover {
+  background: #b91c1c;
+}

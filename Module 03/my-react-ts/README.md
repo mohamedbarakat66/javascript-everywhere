@@ -9,3 +9,9 @@ I will use `map` and object spread to update tasks without mutation.
 I will use `filter` to count completed tasks.
 I will calculate the completion percentage based on the total tasks.
 The values will be calculated from the tasks array, not stored in state.
+
+### Assignment 3.1 – Undo Delete
+
+I will add a state to store the last deleted task.
+When a task is deleted, I will save it before removing it.
+The Undo button will restore the deleted task with the same ID.
