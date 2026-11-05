@@ -3,7 +3,7 @@ import TaskCard from "./TaskCard";
 import { nextStatus } from "./nextStatus";
 import type { Task } from "./types";
 import "./App.css";
-
+type SortMode = "default" | "title";
 function App() {
   const [tasks, setTasks] = useState<Task[]>([
     { id: 1, title: "Learn React", status: "To Do" },
@@ -12,6 +12,7 @@ function App() {
   ]);
 
   const [lastDeletedTask, setLastDeletedTask] = useState<Task | null>(null);
+  const [sortMode, setSortMode] = useState<SortMode>("default");
 
   const doneCount = tasks.filter(
     (task) => task.status === "Done"
@@ -21,6 +22,11 @@ function App() {
     tasks.length === 0
       ? 0
       : Math.round((doneCount / tasks.length) * 100);
+
+      const sortedTasks =
+  sortMode === "title"
+    ? [...tasks].sort((a, b) => a.title.localeCompare(b.title))
+    : tasks;
 
   function handleNextStatus(id: number) {
     setTasks((prevTasks) =>
@@ -68,8 +74,7 @@ function App() {
           Undo Delete
         </button>
       )}
-
-      {tasks.map((task) => (
+{sortedTasks.map((task) => (
         <TaskCard
           key={task.id}
           task={task}
@@ -77,6 +82,15 @@ function App() {
           onDelete={() => handleDelete(task.id)}
         />
       ))}
+      <button
+  onClick={() =>
+    setSortMode((prev) =>
+      prev === "default" ? "title" : "default"
+    )
+  }
+>
+  Sort: {sortMode}
+</button>
     </div>
   );
 }

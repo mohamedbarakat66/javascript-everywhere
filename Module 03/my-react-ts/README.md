@@ -15,3 +15,10 @@ The values will be calculated from the tasks array, not stored in state.
 I will add a state to store the last deleted task.
 When a task is deleted, I will save it before removing it.
 The Undo button will restore the deleted task with the same ID.
+
+
+### Assignment 4.1 – Task Sorting
+
+I will add a state to track the current sort mode.
+I will sort a copy of the tasks array by title when needed.
+The original tasks array will remain unchanged.
