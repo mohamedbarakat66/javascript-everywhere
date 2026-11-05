@@ -11,6 +11,15 @@ function App() {
     { id: 3, title: "Build Project", status: "Done" },
   ]);
 
+  const doneCount = tasks.filter(
+  (task) => task.status === "Done"
+).length;
+
+const percentage =
+  tasks.length === 0
+    ? 0
+    : Math.round((doneCount / tasks.length) * 100);
+
   function handleNextStatus(id: number) {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -24,7 +33,10 @@ function App() {
 return (
   <div className="app">
     <h1>My Tasks</h1>
-    <p>Manage your tasks and track your progress.</p>
+
+    <p>
+      {doneCount} of {tasks.length} done ({percentage}%)
+    </p>
 
     {tasks.map((task) => (
       <TaskCard

@@ -78,3 +78,10 @@ button:hover {
 button:active {
   transform: scale(0.97);
 }
+
+.app > p {
+  color: #60a5fa;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 12px 0 30px;
+}
