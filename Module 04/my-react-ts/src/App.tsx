@@ -1,7 +1,11 @@
-import TaskFilters, { type SortOption } from "./TaskFilters";
+
 import { useState } from "react";
 import TaskCard from "./TaskCard";
 import { nextStatus } from "./nextStatus";
+import TaskFilters, {
+  type SortOption,
+  type StatusFilter,
+} from "./TaskFilters";
 import type { Task } from "./types";
 import "./App.css";
 
@@ -21,17 +25,36 @@ function App() {
   const [dueDate, setDueDate] = useState("");
   const [error, setError] = useState("");
 
-  const doneCount = tasks.filter((task) => task.status === "Done").length;
+  const [searchText, setSearchText] = useState("");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+
+  const doneCount = tasks.filter(
+    (task) => task.status === "Done"
+  ).length;
 
   const percentage =
-    tasks.length === 0 ? 0 : Math.round((doneCount / tasks.length) * 100);
+    tasks.length === 0
+      ? 0
+      : Math.round((doneCount / tasks.length) * 100);
 
-  const sortedTasks = [...tasks].sort((a, b) => {
+  const filteredTasks = tasks.filter((task) => {
+    const matchesText =
+      task.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      (task.description ?? "").toLowerCase().includes(searchText.toLowerCase());
+
+    const matchesStatus =
+      statusFilter === "all" || task.status === statusFilter;
+
+    return matchesText && matchesStatus;
+  });
+
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
     if (sortOption === "title") {
       return a.title.localeCompare(b.title);
     }
 
     if (sortOption === "dueDate") {
+      if (!a.dueDate && !b.dueDate) return 0;
       if (!a.dueDate) return 1;
       if (!b.dueDate) return -1;
 
@@ -41,11 +64,24 @@ function App() {
     return 0;
   });
 
+  const isFiltered =
+    searchText.trim() !== "" ||
+    statusFilter !== "all" ||
+    sortOption !== "default";
+
+  function handleClearFilters() {
+    setSearchText("");
+    setStatusFilter("all");
+    setSortOption("default");
+  }
+
   function handleNextStatus(id: number) {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === id ? { ...task, status: nextStatus(task.status) } : task,
-      ),
+        task.id === id
+          ? { ...task, status: nextStatus(task.status) }
+          : task
+      )
     );
   }
 
@@ -56,7 +92,9 @@ function App() {
 
     setLastDeletedTask(deletedTask);
 
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    setTasks((prevTasks) =>
+      prevTasks.filter((task) => task.id !== id)
+    );
 
     if (selectedTaskId === id) {
       setSelectedTaskId(null);
@@ -66,7 +104,10 @@ function App() {
   function handleUndo() {
     if (!lastDeletedTask) return;
 
-    setTasks((prevTasks) => [...prevTasks, lastDeletedTask]);
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      lastDeletedTask,
+    ]);
 
     setLastDeletedTask(null);
   }
@@ -75,7 +116,7 @@ function App() {
     if (sortedTasks.length === 0) return;
 
     const currentIndex = sortedTasks.findIndex(
-      (task) => task.id === selectedTaskId,
+      (task) => task.id === selectedTaskId
     );
 
     const nextIndex = (currentIndex + 1) % sortedTasks.length;
@@ -139,7 +180,9 @@ function App() {
 
         <p
           className={
-            description.length > 180 ? "counter counter-danger" : "counter"
+            description.length > 180
+              ? "counter counter-danger"
+              : "counter"
           }
         >
           {description.length} / 200
@@ -161,11 +204,40 @@ function App() {
         <button type="submit">Add Task</button>
       </form>
 
-      {lastDeletedTask && <button onClick={handleUndo}>Undo Delete</button>}
+      {lastDeletedTask && (
+        <button onClick={handleUndo}>
+          Undo Delete
+        </button>
+      )}
 
-      <button onClick={handleSelectNext}>Select next</button>
+      <button onClick={handleSelectNext}>
+        Select next
+      </button>
 
-      <TaskFilters sortOption={sortOption} onSortChange={setSortOption} />
+      <TaskFilters
+        sortOption={sortOption}
+        onSortChange={setSortOption}
+        searchText={searchText}
+        onSearchChange={setSearchText}
+        statusFilter={statusFilter}
+        onStatusChange={setStatusFilter}
+      />
+
+      <div className="filter-results">
+        <span>
+          Showing {sortedTasks.length} of {tasks.length}
+        </span>
+
+        {isFiltered && (
+          <button
+            className="clear-filters"
+            onClick={handleClearFilters}
+          >
+            Clear filters
+          </button>
+        )}
+      </div>
+
       {sortedTasks.map((task) => (
         <div
           key={task.id}

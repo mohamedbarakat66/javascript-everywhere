@@ -147,3 +147,34 @@ button:hover {
     width: 100%;
   }
 }
+
+
+.filter-results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 10px;
+  color: #d1d5db;
+  font-size: 14px;
+}
+
+.clear-filters {
+  background-color: #374151;
+  color: #60a5fa;
+  border: 1px solid #475569;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.clear-filters:hover {
+  background-color: #475569;
+}
+
+.task-filters input {
+  padding: 10px;
+  min-width: 180px;
+}
+
+.task-filters select {
+  padding: 10px;
+}
