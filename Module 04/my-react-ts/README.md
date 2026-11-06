@@ -14,3 +14,11 @@ I will add a sort select component with three options: Default, Title A–Z, and
 I will use a separate sorting function to sort a copy of the tasks without changing the original array.
 
 Tasks without a due date will always appear last when sorting by due date.
+
+### Task 3.1 – My Plan
+
+I will calculate the number of tasks after applying the filters and display it with the total number of tasks.
+
+I will show the Clear filters button only when a text, status, or sort filter is active.
+
+When clicked, the button will reset all filters to their default values.
