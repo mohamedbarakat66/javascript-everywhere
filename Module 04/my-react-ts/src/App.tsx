@@ -28,6 +28,8 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
+  const [showDiscardConfirm, setShowDiscardConfirm] = useState(false);
+
   const doneCount = tasks.filter(
     (task) => task.status === "Done"
   ).length;
@@ -128,6 +130,26 @@ function App() {
     setSelectedTaskId(sortedTasks[nextIndex].id);
   }
 
+  function resetForm() {
+    setTitle("");
+    setDescription("");
+    setDueDate("");
+    setError("");
+    setShowDiscardConfirm(false);
+  }
+
+  function handleCancel() {
+    if (title || description || dueDate) {
+      setShowDiscardConfirm(true);
+    } else {
+      resetForm();
+    }
+  }
+
+  function handleDiscard() {
+    resetForm();
+  }
+
   function handleAddTask(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -150,11 +172,7 @@ function App() {
     };
 
     addTask(newTask);
-
-    setTitle("");
-    setDescription("");
-    setDueDate("");
-    setError("");
+    resetForm();
   }
 
   function handleDuplicate(task: Task) {
@@ -217,6 +235,27 @@ function App() {
         )}
 
         <button type="submit">Add Task</button>
+
+        <button type="button" onClick={handleCancel}>
+          Cancel
+        </button>
+
+        {showDiscardConfirm && (
+          <div className="discard-confirm">
+            <p role="alert">Discard changes?</p>
+
+            <button type="button" onClick={handleDiscard}>
+              Discard
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowDiscardConfirm(false)}
+            >
+              Keep editing
+            </button>
+          </div>
+        )}
       </form>
 
       {lastDeletedTask && (

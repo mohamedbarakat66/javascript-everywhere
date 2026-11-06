@@ -31,3 +31,17 @@ I will add a Duplicate button to each TaskCard.
 I will create a copy with a new id and a title starting with "Copy of".
 
 I will reuse the existing add logic to make sure the duplicated task starts as To Do.
+
+**### Task 5.1 – Reflection**
+
+**1. Why does `useState(initialValues)` not update when `initialValues` changes?**
+
+`useState` uses the initial value only when the component renders for the first time. Changing `initialValues` later does not automatically update the state.
+
+**2. When is `as StatusFilter` safe, and when is it risky?**
+
+It is safe when I know the value matches one of the allowed status options. It is risky when the value comes from user input because TypeScript does not check it at runtime.
+
+**3. Why do we turn an empty date into `undefined`?**
+
+An empty date means the user did not select a date. We use `undefined` to represent that there is no due date instead of storing an empty string.
