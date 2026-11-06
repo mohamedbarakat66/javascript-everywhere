@@ -1,33 +1,38 @@
 
 .app {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .app h1 {
   color: #60a5fa;
+  font-size: 32px;
   margin-bottom: 10px;
 }
 
 .app h2 {
-  color: #f9fafb;
+  font-size: 22px;
+  margin-top: 0;
 }
 
-.app p {
-  color: #d1d5db;
+.app > p {
+  color: #9ca3af;
+  margin-bottom: 25px;
 }
+
+/* Task Form */
 
 .task-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 500px;
+  max-width: 550px;
+  padding: 22px;
   margin: 25px 0;
-  padding: 20px;
   background-color: #1f2937;
   border: 1px solid #374151;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .task-form input,
@@ -35,21 +40,19 @@
   width: 100%;
   padding: 12px;
   font-size: 15px;
-  color: white;
-  background-color: #111827;
-  border: 1px solid #475569;
-  border-radius: 6px;
-}
-
-.task-form input:focus,
-.task-form textarea:focus {
-  outline: 2px solid #3b82f6;
 }
 
 .task-form textarea {
   min-height: 100px;
   resize: vertical;
 }
+
+.task-form button {
+  margin: 0;
+  padding: 12px;
+}
+
+/* Character Counter */
 
 .counter {
   margin: 0;
@@ -62,27 +65,85 @@
   color: #ef4444 !important;
 }
 
+/* Error Message */
+
 .error {
   color: #f87171 !important;
   font-size: 14px;
+  margin: 0;
 }
+
+/* Buttons */
 
 button {
   padding: 10px 16px;
   margin: 5px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #2563eb;
   color: white;
-  cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.2s;
 }
 
 button:hover {
   background-color: #1d4ed8;
 }
 
-.task-form button {
-  margin: 0;
-  padding: 12px;
+/* Task Filters */
+
+.task-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.task-filters label {
+  color: #f9fafb;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.task-filters select {
+  width: 180px;
+  padding: 11px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.task-filters select option {
+  background-color: #1f2937;
+  color: white;
+}
+
+/* Task Cards */
+
+.app > div:not(.task-form):not(.task-filters) {
+  background-color: #1f2937;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .app {
+    padding: 10px;
+  }
+
+  .app h1 {
+    font-size: 26px;
+  }
+
+  .task-form {
+    padding: 15px;
+  }
+
+  .task-filters {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .task-filters select {
+    width: 100%;
+  }
 }

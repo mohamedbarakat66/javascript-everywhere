@@ -1,11 +1,9 @@
-
+import TaskFilters, { type SortOption } from "./TaskFilters";
 import { useState } from "react";
 import TaskCard from "./TaskCard";
 import { nextStatus } from "./nextStatus";
 import type { Task } from "./types";
 import "./App.css";
-
-type SortMode = "default" | "title";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([
@@ -15,7 +13,7 @@ function App() {
   ]);
 
   const [lastDeletedTask, setLastDeletedTask] = useState<Task | null>(null);
-  const [sortMode, setSortMode] = useState<SortMode>("default");
+  const [sortOption, setSortOption] = useState<SortOption>("default");
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
 
   const [title, setTitle] = useState("");
@@ -23,27 +21,31 @@ function App() {
   const [dueDate, setDueDate] = useState("");
   const [error, setError] = useState("");
 
-  const doneCount = tasks.filter(
-    (task) => task.status === "Done"
-  ).length;
+  const doneCount = tasks.filter((task) => task.status === "Done").length;
 
   const percentage =
-    tasks.length === 0
-      ? 0
-      : Math.round((doneCount / tasks.length) * 100);
+    tasks.length === 0 ? 0 : Math.round((doneCount / tasks.length) * 100);
 
-  const sortedTasks =
-    sortMode === "title"
-      ? [...tasks].sort((a, b) => a.title.localeCompare(b.title))
-      : tasks;
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (sortOption === "title") {
+      return a.title.localeCompare(b.title);
+    }
+
+    if (sortOption === "dueDate") {
+      if (!a.dueDate) return 1;
+      if (!b.dueDate) return -1;
+
+      return a.dueDate.localeCompare(b.dueDate);
+    }
+
+    return 0;
+  });
 
   function handleNextStatus(id: number) {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === id
-          ? { ...task, status: nextStatus(task.status) }
-          : task
-      )
+        task.id === id ? { ...task, status: nextStatus(task.status) } : task,
+      ),
     );
   }
 
@@ -54,9 +56,7 @@ function App() {
 
     setLastDeletedTask(deletedTask);
 
-    setTasks((prevTasks) =>
-      prevTasks.filter((task) => task.id !== id)
-    );
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
 
     if (selectedTaskId === id) {
       setSelectedTaskId(null);
@@ -66,10 +66,7 @@ function App() {
   function handleUndo() {
     if (!lastDeletedTask) return;
 
-    setTasks((prevTasks) => [
-      ...prevTasks,
-      lastDeletedTask,
-    ]);
+    setTasks((prevTasks) => [...prevTasks, lastDeletedTask]);
 
     setLastDeletedTask(null);
   }
@@ -78,7 +75,7 @@ function App() {
     if (sortedTasks.length === 0) return;
 
     const currentIndex = sortedTasks.findIndex(
-      (task) => task.id === selectedTaskId
+      (task) => task.id === selectedTaskId,
     );
 
     const nextIndex = (currentIndex + 1) % sortedTasks.length;
@@ -142,9 +139,7 @@ function App() {
 
         <p
           className={
-            description.length > 180
-              ? "counter counter-danger"
-              : "counter"
+            description.length > 180 ? "counter counter-danger" : "counter"
           }
         >
           {description.length} / 200
@@ -166,33 +161,19 @@ function App() {
         <button type="submit">Add Task</button>
       </form>
 
-      {lastDeletedTask && (
-        <button onClick={handleUndo}>
-          Undo Delete
-        </button>
-      )}
+      {lastDeletedTask && <button onClick={handleUndo}>Undo Delete</button>}
 
-      <button onClick={handleSelectNext}>
-        Select next
-      </button>
+      <button onClick={handleSelectNext}>Select next</button>
 
-      <button
-        onClick={() =>
-          setSortMode((prev) =>
-            prev === "default" ? "title" : "default"
-          )
-        }
-      >
-        Sort: {sortMode}
-      </button>
-
+      <TaskFilters sortOption={sortOption} onSortChange={setSortOption} />
       {sortedTasks.map((task) => (
         <div
           key={task.id}
           style={{
-            border: selectedTaskId === task.id
-              ? "2px solid blue"
-              : "2px solid transparent",
+            border:
+              selectedTaskId === task.id
+                ? "2px solid blue"
+                : "2px solid transparent",
             padding: "10px",
             margin: "10px",
             borderRadius: "8px",
