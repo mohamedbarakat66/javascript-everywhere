@@ -11,15 +11,24 @@ body {
   color: #f9fafb;
 }
 
-h1, h2 {
-  color: #f9fafb;
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 input,
-textarea {
+textarea,
+select {
+  color: #f9fafb;
   background-color: #1f2937;
-  color: white;
   border: 1px solid #475569;
+  border-radius: 8px;
 }
 
 input::placeholder,
@@ -27,11 +36,19 @@ textarea::placeholder {
   color: #9ca3af;
 }
 
-button {
-  background-color: #2563eb;
-  color: white;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #3b82f6;
+  border-color: #3b82f6;
 }
 
-button:hover {
-  background-color: #1d4ed8;
+h1,
+h2,
+h3 {
+  color: #f9fafb;
+}
+
+p {
+  color: #d1d5db;
 }
