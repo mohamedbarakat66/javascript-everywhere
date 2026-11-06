@@ -69,6 +69,10 @@ function App() {
     statusFilter !== "all" ||
     sortOption !== "default";
 
+  function addTask(newTask: Task) {
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+  }
+
   function handleClearFilters() {
     setSearchText("");
     setStatusFilter("all");
@@ -145,12 +149,23 @@ function App() {
       dueDate,
     };
 
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    addTask(newTask);
 
     setTitle("");
     setDescription("");
     setDueDate("");
     setError("");
+  }
+
+  function handleDuplicate(task: Task) {
+    const newTask: Task = {
+      ...task,
+      id: Date.now(),
+      title: `Copy of ${task.title}`,
+      status: "To Do",
+    };
+
+    addTask(newTask);
   }
 
   return (
@@ -255,6 +270,7 @@ function App() {
             task={task}
             onNextStatus={() => handleNextStatus(task.id)}
             onDelete={() => handleDelete(task.id)}
+            onDuplicate={() => handleDuplicate(task)}
           />
         </div>
       ))}

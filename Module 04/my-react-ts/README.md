@@ -22,3 +22,12 @@ I will calculate the number of tasks after applying the filters and display it w
 I will show the Clear filters button only when a text, status, or sort filter is active.
 
 When clicked, the button will reset all filters to their default values.
+
+
+**### Task 4.1 – My Plan**
+
+I will add a Duplicate button to each TaskCard.
+
+I will create a copy with a new id and a title starting with "Copy of".
+
+I will reuse the existing add logic to make sure the duplicated task starts as To Do.
