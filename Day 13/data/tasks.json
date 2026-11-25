@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "title": "Learn JavaScript",
+    "status": "done",
+    "description": "Complete the JavaScript course on Codecademy.",
+    "dueDate": "2023-06-15",
+    "project": "Learning"
+  },
+  {
+    "id": 2,
+    "title": "Build a Portfolio Website",
+    "status": "in progress",
+    "description": "Create a responsive portfolio website using HTML, CSS, and JavaScript.",
+    "dueDate": "2023-07-20",
+    "project": "Projects"
+  },
+  {
+    "id": 3,
+    "title": "Study Python",
+    "status": "done",
+    "description": "Complete the Python course on Codecademy.",
+    "dueDate": "2023-06-15",
+    "project": "Learning"
+  },
+  {
+    "id": 4,
+    "title": "  Learn node.js",
+    "status": "todo",
+    "description": "Complete the node.js course on Codecademy.",
+    "dueDate": "2023-09-15",
+    "project": "Learning"
+  },
+  {
+    "id": 5,
+    "title": {
+      "title": "learn node.js"
+    },
+    "status": "todo"
+  },
+  {
+    "id": 6,
+    "title": {
+      "title": "Learn Node.js"
+    },
+    "status": "todo"
+  },
+  {
+    "id": 7,
+    "title": {
+      "title": "Learn Node.js"
+    },
+    "status": "done"
+  }
+]
